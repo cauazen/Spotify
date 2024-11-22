@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeBeats</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        /* RESET geral e estilo básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #f1f1f1;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1f1f1f;
+            padding: 10px 20px;
+        }
+
+        .navbar .profile, .navbar .settings-icon {
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .navbar .logo-img {
+            width: 60px;
+            height: auto;
+        }
+
+        /* Player Area */
+        .player-area {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px;
+            padding: 20px;
+            background-color: #2a2a2a;
+            border-radius: 15px;
+        }
+
+        .album-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 0.6;
+        }
+
+        .album-cover {
+            width: 250px;
+            height: 250px;
+            margin-bottom: 20px;
+        }
+
+        .album-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .album-details {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .album-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .album-artist {
+            font-size: 18px;
+            color: #aaa;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .control-btn:hover {
+            color: rgb(102, 33, 102);
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #444;
+            height: 5px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background-color: #ff6f61;
+            border-radius: 5px;
+        }
+
+        /* Playlist */
+        .playlist {
+            flex: 0.35;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 15px;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .playlist-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: rgb(177, 58, 177);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .playlist ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .playlist li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #444;
+            cursor: pointer;
+        }
+
+        .playlist li img {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+        }
+
+        .playlist li:hover {
+            background-color: #444;
+        }
+
+        /* Novo item para criar playlist */
+        .create-playlist {
+            background-color: #2a2a2a;
+            border: 1px dashed rgb(177, 58, 177);
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            text-align: center;
+            color: rgb(177, 58, 177);
+            font-size: 16px;
+        }
+
+        .create-playlist img {
+            margin-bottom: 10px;
+        }
+
+        .create-playlist:hover {
+            background-color: #444;
+            border-color: rgb(102, 33, 102);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .player-area {
+                flex-direction: column;
+                margin: 15px;
+            }
+
+            .album-info {
+                margin-bottom: 20px;
+            }
+
+            .playlist {
+                width: 100%;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="profile">
+            <i class="ri-user-fill"></i>
+        </div>
+        <div class="logo">
+            <a href="./index.html">
+                <img src="imgs/logo.png" alt="Logo" class="logo-img">
+            </a>
+        </div>
+        <div class="settings-icon">
+            <i class="ri-settings-5-fill"></i>
+        </div>
+    </header>
+
+    <main class="player-area">
+        <!-- Área do Player -->
+        <section class="album-info">
+            <div class="album-cover">
+                <img src="imgs/starboy.jpg" alt="starboy" class="album-img">
+            </div>
+            <div class="info">
+            <div class="album-details">
+                <h2 class="album-title">starboy</h2>
+                <p class="album-artist">the weekend</p>
+                <audio controls style="margin-top: 30px;">
+                    <source src="./musicas/The Weeknd - Starboy ft. Daft Punk (Official Video) (1).mp3">
+
+                </audio>
+
+            </div>
+            <div class="controls">
+                <button id="prev" class="control-btn"><i class="ri-skip-back-fill"></i></button>
+                <button id="next" class="control-btn"><i class="ri-skip-forward-fill"></i></button>
+                <button id="like-btn" class="control-btn"><i class="ri-heart-line"></i></button>
+            </div>
+            </div>
+        </section>
+
+        <!-- Playlist -->
+        <aside class="playlist">
+            <h3 class="playlist-title">
+                <img src="imgs/images-removebg-preview.png" alt="" width="20px"> Playlist
+            </h3>
+            <ul id="playlist">
+                <li data-src="./barrão/from.mp3" data-img="./barrão/lau.png">
+                    <img src="imgs/to_be_brasilia.jpg" width="75px">To be Brasília
+                </li>
+                <li data-src="./barrão/die_another_day.mp3" data-img="./barrão/Another_Way_2_Die_007_QoS.jpg">
+                    <img src="imgs/333.jpg" width="75px">333
+                </li>
+                <li data-src="./barrão/james.mp3" data-img="./barrão/skyfall.jpg">
+                    <img src="imgs/marilia.jpg" width="75px">Marilia
+                </li>
+                <li data-src="./barrão/mr_lonely.mp3" data-img="./barrão/mr.png">
+                    <img src="imgs/ig_listen.jpg" width="75px">Meu nome não é Igor
+                </li>
+                <li data-src="./barrão/monaco.mp3" data-img="./barrão/monaco.jpg">
+                    <img src="imgs/harry.jpg" width="75px">POP
+                </li>
+                
+                <!-- Adicionando opção de criar playlist -->
+                <li id="create-playlist" class="create-playlist">
+                    <img src="imgs/png-transparent-plus-and-minus-signs-symbol-plus-minus-sign-alipay-minus-10-yuan-activities-miscellaneous-logo-cross-removebg-preview.png" style= "height: 13px; width: 13px; margin-left: 5px;" alt="Adicionar Playlist">
+                    Criar Nova Playlist
+                </li>
+            </ul>
+        </aside>
+    </main>
+
+    <audio id="audio" controls style="display:none;">
+        <source src="James Bond - Skyfall.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <script>
+        // Lógica JavaScript para criar nova playlist
+        document.getElementById('create-playlist').addEventListener('click', function() {
+            const playlistName = prompt("Digite o nome da nova playlist:");
+            if (playlistName) {
+                // Criação do novo item de playlist
+                const newPlaylistItem = document.createElement('li');
+                newPlaylistItem.innerHTML = `
+                    <img src="barrão/new-playlist-icon.png" width="75px"> ${playlistName}
+                `;
+                newPlaylistItem.classList.add('new-playlist-item');
+                document.getElementById('playlist').appendChild(newPlaylistItem);
+            }
+        });
+    </script>
+    <script>
+            const audio = document.getElementById('audio');
+            const playButton = document.getElementById('playButton');
+            const progressBar = document.getElementById('progress-bar');
+
+            playButton.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                    playButton.textContent = 'Pause';
+                } else {
+                    audio.pause();
+                    playButton.textContent = 'Play';
+                }
+            });
+
+            audio.addEventListener('timeupdate', () => {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressBar.value = progress;
+            });
+
+            progressBar.addEventListener('input', () => {
+                const newTime = (progressBar.value / 100) * audio.duration;
+                audio.currentTime = newTime;
+            });
+        </script>
+
+</body>
+</html>

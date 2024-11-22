@@ -1,0 +1,14 @@
+<!-- music_list.html -->
+<button onclick="likeSong('musica1')">Curtir Música 1</button>
+<script>
+    function likeSong(songId) {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            const likedSongs = JSON.parse(localStorage.getItem(`liked_songs_${user.id}`)) || [];
+            if (!likedSongs.includes(songId)) {
+                likedSongs.push(songId);
+                localStorage.setItem(`liked_songs_${user.id}`, JSON.stringify(likedSongs));
+            }
+        }
+    }
+</script>
